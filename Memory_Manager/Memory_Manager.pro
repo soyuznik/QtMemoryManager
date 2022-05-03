@@ -11,7 +11,9 @@ CONFIG += c++11
 SOURCES += \
     main.cpp
 
-HEADERS +=
+HEADERS += \
+    ManagerThreading.h \
+    SelfBarSet.h
 
 FORMS +=
 
