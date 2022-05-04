@@ -12,7 +12,8 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    ManagerThreading.h \
+    Functionality.h \
+    GetDirSize.h \
     SelfBarSet.h
 
 FORMS +=

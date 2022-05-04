@@ -6,6 +6,7 @@
 
 class SelfBarSet{
 public:
+    std::string dataForDiskBar = " ";
     std::map<int , float> BarSetData;
     QBarSet* set0 = new QBarSet("");
     SelfBarSet();

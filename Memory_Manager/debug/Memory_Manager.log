@@ -1,0 +1,4 @@
+﻿  Access is denied.
+C:\Users\user\AppData\Local\QtMsBuild\qt_vars.targets(192,7): error MSB4086: A numeric comparison was attempted on "$(QtVersionMajor)" that evaluates to "" instead of a number, in condition "$(QtVersionMajor) > 5
+C:\Users\user\AppData\Local\QtMsBuild\qt_vars.targets(192,7): error MSB4086:                   OR ($(QtVersionMajor) == 5 AND ($(QtVersionMinor) > 13
+C:\Users\user\AppData\Local\QtMsBuild\qt_vars.targets(192,7): error MSB4086:                     OR ($(QtVersionMinor) == 13 AND ($(QtVersionPatch) >= 2))))".
