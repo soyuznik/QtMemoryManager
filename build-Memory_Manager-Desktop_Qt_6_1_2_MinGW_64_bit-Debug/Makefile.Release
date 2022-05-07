@@ -122,9 +122,9 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-release/main.o: ../Memory_Manager/main.cpp ../Memory_Manager/GetDirSize.h \
-		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/QtWidgets \
-		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/QtWidgetsDepends \
+release/main.o: ../Memory_Manager/main.cpp ../Memory_Manager/SelfBarSet.h \
+		D:/Qt/6.1.2/mingw81_64/include/QtCharts/QtCharts \
+		D:/Qt/6.1.2/mingw81_64/include/QtCharts/QtChartsDepends \
 		D:/Qt/6.1.2/mingw81_64/include/QtCore/QtCore \
 		D:/Qt/6.1.2/mingw81_64/include/QtCore/QtCoreDepends \
 		D:/Qt/6.1.2/mingw81_64/include/QtCore/qglobal.h \
@@ -457,6 +457,8 @@ release/main.o: ../Memory_Manager/main.cpp ../Memory_Manager/GetDirSize.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtGui/qundostack.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtGui/qvalidator.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtGui/qtguiversion.h \
+		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/QtWidgets \
+		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/QtWidgetsDepends \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qtwidgets-config.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qabstractbutton.h \
@@ -595,9 +597,6 @@ release/main.o: ../Memory_Manager/main.cpp ../Memory_Manager/GetDirSize.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qwidgetaction.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qwizard.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtWidgets/qtwidgetsversion.h \
-		../Memory_Manager/SelfBarSet.h \
-		D:/Qt/6.1.2/mingw81_64/include/QtCharts/QtCharts \
-		D:/Qt/6.1.2/mingw81_64/include/QtCharts/QtChartsDepends \
 		D:/Qt/6.1.2/mingw81_64/include/QtOpenGL/QtOpenGL \
 		D:/Qt/6.1.2/mingw81_64/include/QtOpenGL/QtOpenGLDepends \
 		D:/Qt/6.1.2/mingw81_64/include/QtOpenGL/qtopenglglobal.h \
@@ -707,7 +706,8 @@ release/main.o: ../Memory_Manager/main.cpp ../Memory_Manager/GetDirSize.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtCharts/qvpiemodelmapper.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtCharts/qvxymodelmapper.h \
 		D:/Qt/6.1.2/mingw81_64/include/QtCharts/qxylegendmarker.h \
-		D:/Qt/6.1.2/mingw81_64/include/QtCharts/qtchartsversion.h
+		D:/Qt/6.1.2/mingw81_64/include/QtCharts/qtchartsversion.h \
+		../Memory_Manager/GetDirSize.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o release\main.o ..\Memory_Manager\main.cpp
 
 ####### Install

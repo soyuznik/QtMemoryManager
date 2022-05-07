@@ -1,4 +1,4 @@
-#include <GetDirSize.h>
+
 #include <SelfBarSet.h>
 #include <iostream>
 #include <thread>
@@ -7,51 +7,6 @@
 
 
 
-
-
-std::map<std::string , long> /*std::map<std::string , double>*/ ListItems(std::string dir){
-    std::map<std::string , long> __list;
-    QDir source(QString::fromStdString((dir)));
-    QStringList const files = source.entryList(QDir::Files);
-    QStringList const folders = source.entryList(QDir::Dirs | QDir::NoDotAndDotDot);
-
-    foreach(QString str, files) {
-        QFile File((dir + "/" + str.toStdString()).c_str());
-      __list.insert(std::make_pair(str.toStdString() , File.size()));
-    }
-    foreach(QString str, folders) {
-       __list.insert(std::make_pair(str.toStdString() , dirSize((dir + "/" + str.toStdString()).c_str())));
-    }
-    return __list;
-
-}
-
-void updateList(QTextEdit* upperBar , QListWidget* list , QChartView* w , QChart *chart){
-
-    list->clear();
-    QString target_dir = upperBar->toPlainText();
-    //std::cout << target_dir.toStdString() << std::endl;
-    std::map<std::string , long> list_Data = ListItems(target_dir.toStdString());
-    if(list_Data.size() == 0){
-        return;
-    }
-    std::vector<float> chart_Data;
-    std::vector<std::string> chart_Names;
-    for (auto const& [dir, size] : list_Data)
-    {
-        chart_Data.push_back((float)size);
-        std::string itemData = dir;
-        chart_Names.push_back(itemData);
-        list->addItem(QString(itemData.c_str()));
-    }
-    SelfBarSet *set1 = new SelfBarSet();
-    QBarSeries *series1 = new QBarSeries();
-    set1->add_data(chart_Names , chart_Data);
-    series1->append(set1->set0);
-    chart->removeAllSeries();
-    w->setChart(chart);
-    chart->addSeries(series1);
-}
 
 
 
@@ -65,8 +20,7 @@ int main(int argc, char *argv[])
         /// definitions
         QChartView w;
         SelfBarSet *set = new SelfBarSet();
-        QBarSeries *series = new QBarSeries;
-        QGraphicsRectItem hoverItem;
+
         QChart *chart= new QChart;
         QHBoxLayout* baseL = new QHBoxLayout();
         QHBoxLayout* upperL = new QHBoxLayout();
@@ -103,28 +57,11 @@ int main(int argc, char *argv[])
 
 
 
-        QString target_dir = upperBar->toPlainText();
-        if(target_dir.toStdString() == ""){
-            target_dir = ".";
-        }
-        std::map<std::string , long> list_Data = ListItems(target_dir.toStdString());
-        std::vector<float> chart_Data;
-        std::vector<std::string> chart_Names;
-        for (auto const& [dir, size] : list_Data)
-        {
-            chart_Data.push_back((float)size);
-            std::string itemData = dir;
-            chart_Names.push_back(itemData);
-            list->addItem(QString(itemData.c_str()));
-        }
-
-        set->add_data(chart_Names , chart_Data);
-        series->append(set->set0);
-        w.setChart(chart);
-        chart->addSeries(series);
+        updateList(upperBar, list, &w, chart , set);
         chart->legend()->setVisible(false);
-        hoverItem.setBrush(QBrush(Qt::darkBlue));
-        hoverItem.setPen(Qt::NoPen);
+
+
+
 
 
 
@@ -132,8 +69,10 @@ int main(int argc, char *argv[])
         /// other definitions /////////////////////
 
 
-        QObject::connect(set->set0, &QBarSet::hovered, [&diskBar, &set , &w, &hoverItem](bool status, int index){
-
+        QObject::connect(set->set0, &QBarSet::hovered, [&diskBar, &set , &w](bool status, int index){
+            QGraphicsRectItem hoverItem;
+            hoverItem.setBrush(QBrush(Qt::darkBlue));
+            hoverItem.setPen(Qt::NoPen);
             diskBar->setText(QString::fromStdString(std::string("clicked index nr --> ") + set->get_value(index)));
             QPoint p = w.mapFromGlobal(QCursor::pos());
             if(status){
@@ -147,10 +86,10 @@ int main(int argc, char *argv[])
                 hoverItem.hide();
             }
         });
-        QObject::connect(upperBar, &QTextEdit::textChanged, [&upperBar , &list , &w , &chart](){
+        QObject::connect(upperBar, &QTextEdit::textChanged, [&upperBar , &list , &w , &chart , &set](){
             //updateList(QTextEdit* upperBar , QListWidget* list , QChartView* w , SelfBarSet *set , QBarSeries *series , QChart *chart)
             chart->removeAllSeries();
-            std::thread update_list(&updateList , upperBar, list, &w, chart);
+            std::thread update_list(&updateList , upperBar, list, &w, chart , set);
             update_list.detach();
         });
 
