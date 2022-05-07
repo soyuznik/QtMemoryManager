@@ -12,7 +12,6 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Functionality.h \
     GetDirSize.h \
     SelfBarSet.h
 
